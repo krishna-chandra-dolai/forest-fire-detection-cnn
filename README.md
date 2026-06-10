@@ -38,13 +38,17 @@ forest-fire-detection-cnn/
 |-- requirements.txt
 |-- .gitignore
 |-- data/
-|   `-- README.md
+|   |-- README.md
+|   `-- legacy_forestfires.csv
 |-- docs/
+|   |-- local-file-inventory.md
 |   `-- project-details.md
 |-- models/
 |   `-- README.md
 |-- notebooks/
-|   `-- README.md
+|   |-- README.md
+|   |-- forest_fire_detection_cnn_resnet50.ipynb
+|   `-- legacy_forest_fire_area_prediction.ipynb
 |-- presentation/
 |   `-- final-presentation.pdf
 |-- related/
@@ -52,6 +56,7 @@ forest-fire-detection-cnn/
 |   `-- predict-the-forest-fires-archive.7z
 |-- reports/
 |   |-- forest-fire-detection-using-cnn.pdf
+|   |-- legacy-forest-fire-area-prediction-report.pdf
 |   `-- legacy-ml-project-report.docx
 `-- src/
     |-- __init__.py
@@ -59,6 +64,11 @@ forest-fire-detection-cnn/
     |-- train.py
     `-- predict.py
 ```
+
+## Notebooks
+
+- `notebooks/forest_fire_detection_cnn_resnet50.ipynb` contains the CNN/ResNet-50 notebook version of the project.
+- `notebooks/legacy_forest_fire_area_prediction.ipynb` is the original notebook found inside the local archive. It is a different CSV-based forest-fire burned-area prediction project.
 
 ## Dataset
 
@@ -81,7 +91,11 @@ data/
     `-- no_fire/
 ```
 
-The dataset itself is not included in this repository. Add the image folders locally before training.
+The original CNN image dataset itself was not present in the supplied local project folder, so only the expected structure is included. Add the image folders locally before training.
+
+The found archive also included the small CSV dataset for the legacy notebook:
+
+- `data/legacy_forestfires.csv`
 
 ## Setup
 

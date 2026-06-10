@@ -10,9 +10,9 @@ env/
 *.pb
 models/*
 !models/README.md
-data/*
-!data/README.md
+data/train/
+data/test/
+data/raw/
 *.log
 .DS_Store
 Thumbs.db
-
