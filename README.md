@@ -41,6 +41,7 @@ forest-fire-detection-cnn/
 |   |-- README.md
 |   `-- legacy_forestfires.csv
 |-- docs/
+|   |-- screenshots/
 |   |-- local-file-inventory.md
 |   `-- project-details.md
 |-- models/
@@ -69,6 +70,22 @@ forest-fire-detection-cnn/
 
 - `notebooks/forest_fire_detection_cnn_resnet50.ipynb` contains the CNN/ResNet-50 notebook version of the project.
 - `notebooks/legacy_forest_fire_area_prediction.ipynb` is the original notebook found inside the local archive. It is a different CSV-based forest-fire burned-area prediction project.
+
+## Output Screenshots
+
+CNN/ResNet-50 report outputs:
+
+![CNN sample output predictions](docs/screenshots/cnn-report/cnn-sample-output-predictions.png)
+
+![CNN classification report](docs/screenshots/cnn-report/cnn-classification-report.png)
+
+![CNN fire prediction output](docs/screenshots/cnn-report/cnn-fire-prediction-output.png)
+
+Legacy notebook output:
+
+![Legacy REC curve comparison](docs/screenshots/legacy-notebook/cell-84-output-02-relative-performance-of-random-forest-and-nn-plt.png)
+
+More extracted screenshots are available in `docs/screenshots/`.
 
 ## Dataset
 
@@ -134,6 +151,14 @@ python src/predict.py --model models/forest_fire_resnet50.keras --image path/to/
 - Try EfficientNet, DenseNet, or Vision Transformers.
 - Deploy on edge devices for real-time alerts.
 - Add explainability with Grad-CAM.
+
+## Still To Add
+
+- Original CNN image dataset folders, if available.
+- Original trained model file, for example `.keras` or `.h5`.
+- Executed CNN notebook outputs generated from the actual dataset.
+- A small demo app using Streamlit or Flask for image upload and prediction.
+- A license file, if this project should be reused publicly.
 
 ## Author
 
