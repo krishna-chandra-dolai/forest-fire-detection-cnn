@@ -1,0 +1,2 @@
+"""Forest fire detection package."""
+
