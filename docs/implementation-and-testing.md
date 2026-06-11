@@ -22,6 +22,19 @@ The report's implementation is represented in:
 - `src/evaluate.py`
 - `src/test_cases.py`
 
+## Page 35-36 Code Map
+
+The code screenshots from report pages 35 and 36 are stored here:
+
+![Report page 35 imports code](screenshots/cnn-report/cnn-imports-code.png)
+
+![Report pages 35-36 data preprocessing and augmentation code](screenshots/cnn-report/cnn-data-augmentation-code.png)
+
+The runnable code version is in `src/train.py`:
+
+- Page 35 importing required libraries: `src/train.py`, lines 5-13
+- Page 35-36 data preprocessing and augmentation: `src/train.py`, lines 38-67
+
 The training pipeline follows the report:
 
 - ResNet-50 transfer learning

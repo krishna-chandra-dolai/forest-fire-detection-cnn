@@ -188,6 +188,16 @@ This script covers the practical model-load, fire/non-fire prediction, rotation,
 
 CNN/ResNet-50 report outputs:
 
+Report code screenshots from pages 35-37:
+
+![Report page 35 imports code](docs/screenshots/cnn-report/cnn-imports-code.png)
+
+![Report pages 35-36 data preprocessing and augmentation code](docs/screenshots/cnn-report/cnn-data-augmentation-code.png)
+
+![Report page 37 model training code](docs/screenshots/cnn-report/cnn-model-training-code.png)
+
+Report output screenshots:
+
 ![CNN sample output predictions](docs/screenshots/cnn-report/cnn-sample-output-predictions.png)
 
 ![CNN confusion matrix and classification report](docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png)
