@@ -35,6 +35,7 @@ Forest fires can spread quickly and cause major environmental, economic, and hum
 - TensorFlow/Keras
 - ResNet-50
 - NumPy
+- Pandas
 - scikit-learn
 - Matplotlib
 - Seaborn
