@@ -192,6 +192,8 @@ CNN/ResNet-50 report outputs:
 
 ![CNN confusion matrix and classification report](docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png)
 
+![CNN epoch-wise performance overview](docs/screenshots/cnn-report/cnn-epoch-performance-overview.png)
+
 ![CNN classification report](docs/screenshots/cnn-report/cnn-classification-report.png)
 
 ![CNN fire prediction output](docs/screenshots/cnn-report/cnn-fire-prediction-output.png)

@@ -89,4 +89,5 @@ The relevant implementation and output figures from the report are stored in:
 - `docs/screenshots/cnn-report/cnn-imports-code.png`
 - `docs/screenshots/cnn-report/cnn-data-augmentation-code.png`
 - `docs/screenshots/cnn-report/cnn-model-training-code.png`
+- `docs/screenshots/cnn-report/cnn-epoch-performance-overview.png`
 - `docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png`
