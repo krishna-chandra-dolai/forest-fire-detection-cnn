@@ -7,6 +7,7 @@ This folder contains visual outputs extracted from the available project files.
 The following screenshots were rendered from `reports/forest-fire-detection-using-cnn.pdf`:
 
 - `cnn-report/cnn-fire-prediction-output.png`
+- `cnn-report/cnn-non-fire-sample-images.png`
 - `cnn-report/cnn-classification-report.png`
 - `cnn-report/cnn-sample-output-predictions.png`
 - `cnn-report/cnn-confusion-matrix-and-report.png`

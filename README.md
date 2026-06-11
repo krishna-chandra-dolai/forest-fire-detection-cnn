@@ -201,6 +201,8 @@ Report output screenshots:
 
 ![CNN sample output predictions](docs/screenshots/cnn-report/cnn-sample-output-predictions.png)
 
+![CNN non-fire sample images](docs/screenshots/cnn-report/cnn-non-fire-sample-images.png)
+
 ![CNN confusion matrix and classification report](docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png)
 
 ![CNN epoch-wise performance overview](docs/screenshots/cnn-report/cnn-epoch-performance-overview.png)
