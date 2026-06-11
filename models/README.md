@@ -1,12 +1,15 @@
-# Models Folder
+# Models
 
-Trained model files should be saved here.
+Trained model files are not committed to this repository.
 
-This repository does not include trained `.keras` or `.h5` model files by default because generated model binaries can be large and depend on the training dataset.
-
-Example output path:
+After training, the default model output path is:
 
 ```text
 models/forest_fire_resnet50.keras
 ```
 
+Prediction uses this path by default:
+
+```bash
+python -m src.predict --model models/forest_fire_resnet50.keras --image path/to/image.jpg
+```

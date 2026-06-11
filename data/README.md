@@ -1,8 +1,12 @@
-# Dataset Folder
+# Dataset
 
-Place the CNN fire/no-fire image dataset here before training.
+The CNN image dataset is not included in this repository.
 
-Expected structure:
+Download the dataset manually and place it in the expected folder structure before training. The project report mentions a Kaggle image dataset with 999 training images and 999 test images.
+
+Dataset source: [Add Kaggle dataset link here]
+
+Expected folder structure:
 
 ```text
 data/
@@ -14,8 +18,9 @@ data/
     `-- no_fire/
 ```
 
-The original report mentions a Kaggle dataset with 999 images in the training set and 999 images in the test or validation set, resized to 224 x 224 pixels.
+Class folder names must be exactly:
 
-The actual CNN image dataset was not present in the local folder that was provided. The only dataset file found locally was the legacy CSV dataset from `Predict-the-Forest-Fires.7z`:
+- `fire`
+- `no_fire`
 
-- `data/legacy_forestfires.csv`
+Training will fail with a clear error if any of these folders are missing.

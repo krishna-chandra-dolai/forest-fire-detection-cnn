@@ -27,11 +27,14 @@ Found folders:
 - `forestfires.csv`
 - `project report.pdf`
 
-The extracted notebook and CSV are included in this repository as:
+The extracted notebook, CSV, and related files are kept separately under `legacy/`:
 
-- `notebooks\legacy_forest_fire_area_prediction.ipynb`
-- `data\legacy_forestfires.csv`
-- `reports\legacy-forest-fire-area-prediction-report.pdf`
+- `legacy\notebooks\legacy_forest_fire_area_prediction.ipynb`
+- `legacy\data\legacy_forestfires.csv`
+- `legacy\reports\legacy-forest-fire-area-prediction-report.pdf`
+- `legacy\reports\legacy-ml-project-report.docx`
+- `legacy\archives\predict-the-forest-fires-archive.7z`
+- `legacy\original-notes.txt`
 
 ## Important Note
 

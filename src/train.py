@@ -13,7 +13,27 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-from config import BATCH_SIZE, DEFAULT_MODEL_PATH, EPOCHS, IMAGE_SIZE
+from src.config import BATCH_SIZE, DEFAULT_MODEL_PATH, EPOCHS, IMAGE_SIZE
+
+
+def validate_dataset_structure(train_dir: str, val_dir: str) -> None:
+    required_dirs = [
+        Path(train_dir) / "fire",
+        Path(train_dir) / "no_fire",
+        Path(val_dir) / "fire",
+        Path(val_dir) / "no_fire",
+    ]
+
+    if any(not path.is_dir() for path in required_dirs):
+        raise FileNotFoundError(
+            "Dataset directory not found or incomplete.\n\n"
+            "Expected structure:\n"
+            "data/train/fire\n"
+            "data/train/no_fire\n"
+            "data/test/fire\n"
+            "data/test/no_fire\n\n"
+            "Download the dataset and place it in the expected folders before training."
+        )
 
 
 def build_generators(train_dir: str, val_dir: str, batch_size: int):
@@ -93,6 +113,8 @@ def main():
     parser.add_argument("--model-out", default=DEFAULT_MODEL_PATH)
     args = parser.parse_args()
 
+    validate_dataset_structure(args.train_dir, args.val_dir)
+
     model_out = Path(args.model_out)
     model_out.parent.mkdir(parents=True, exist_ok=True)
 
@@ -130,4 +152,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

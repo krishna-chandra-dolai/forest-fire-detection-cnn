@@ -6,7 +6,7 @@ from tensorflow.keras.applications.resnet50 import preprocess_input
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
-from config import DEFAULT_MODEL_PATH, IMAGE_SIZE
+from src.config import DEFAULT_MODEL_PATH, IMAGE_SIZE
 
 
 def load_image(image_path: str):

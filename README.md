@@ -1,102 +1,91 @@
 # Forest Fire Detection Using CNN
 
-Image-based forest fire detection using a Convolutional Neural Network with the ResNet-50 architecture and transfer learning.
+Binary forest fire image classification using a Convolutional Neural Network with ResNet-50 transfer learning.
 
-The project classifies an input image into:
+## Project Overview
+
+This project detects whether an input image belongs to one of two classes:
 
 - Fire
 - No Fire
 
-## Project Summary
+The model uses ResNet-50 with ImageNet transfer learning, TensorFlow/Keras, and 224 x 224 image input. The goal is to support early fire detection from image data captured by cameras, drones, or monitoring systems.
 
-Forest fires can spread quickly and cause severe environmental and human damage. This project uses deep learning to detect forest fire from images so that early warning systems can respond faster.
+## Problem Statement
 
-The model described in the project report uses:
+Forest fires can spread quickly and cause major environmental, economic, and human damage. Manual monitoring is slow and difficult at scale. This project applies deep learning to classify images as fire or no fire, helping support faster detection and response.
 
+## Key Features
+
+- Binary image classification: fire vs no fire
+- ResNet-50 based transfer learning
+- TensorFlow/Keras implementation
+- Image preprocessing and augmentation
+- Early stopping and best-model checkpointing
+- Confusion matrix generation
+- Single-image prediction script
+- Jupyter Notebook version of the CNN workflow
+- Project report, presentation, and output screenshots included
+
+## Tech Stack
+
+- Python
+- TensorFlow/Keras
 - ResNet-50
-- Transfer learning with ImageNet weights
-- TensorFlow and Keras
-- 224 x 224 image input
-- Binary fire/no-fire classification
-- Data augmentation
-- Adam optimizer
+- NumPy
+- scikit-learn
+- Matplotlib
+- Seaborn
+- OpenCV/Pillow
+- Jupyter Notebook
 
-Reported performance:
-
-| Metric | Value |
-|---|---:|
-| Test accuracy | 95.80% |
-| Validation accuracy | 96.00% |
-| Validation loss | 0.0458 |
-| Test loss | 0.1589 |
-
-## Repository Structure
+## Project Structure
 
 ```text
 forest-fire-detection-cnn/
 |-- README.md
 |-- requirements.txt
 |-- .gitignore
+|-- LICENSE
+|-- PROJECT_STRUCTURE.md
 |-- data/
-|   |-- README.md
-|   `-- legacy_forestfires.csv
+|   `-- README.md
 |-- docs/
 |   |-- screenshots/
-|   |-- local-file-inventory.md
-|   `-- project-details.md
+|   |-- project-details.md
+|   `-- local-file-inventory.md
 |-- models/
 |   `-- README.md
 |-- notebooks/
-|   |-- README.md
-|   |-- forest_fire_detection_cnn_resnet50.ipynb
-|   `-- legacy_forest_fire_area_prediction.ipynb
+|   `-- forest_fire_detection_cnn_resnet50.ipynb
 |-- presentation/
 |   `-- final-presentation.pdf
-|-- related/
-|   |-- original-notes.txt
-|   `-- predict-the-forest-fires-archive.7z
 |-- reports/
-|   |-- forest-fire-detection-using-cnn.pdf
-|   |-- legacy-forest-fire-area-prediction-report.pdf
-|   `-- legacy-ml-project-report.docx
-`-- src/
-    |-- __init__.py
-    |-- config.py
-    |-- train.py
-    `-- predict.py
+|   `-- forest-fire-detection-using-cnn.pdf
+|-- src/
+|   |-- __init__.py
+|   |-- config.py
+|   |-- train.py
+|   `-- predict.py
+`-- legacy/
+    `-- old/unrelated CSV-based project files
 ```
 
-## Notebooks
+## Dataset Instructions
 
-- `notebooks/forest_fire_detection_cnn_resnet50.ipynb` contains the CNN/ResNet-50 notebook version of the project.
-- `notebooks/legacy_forest_fire_area_prediction.ipynb` is the original notebook found inside the local archive. It is a different CSV-based forest-fire burned-area prediction project.
+The dataset is not included in this repository. Download it manually and place it inside `data/`.
 
-## Output Screenshots
+Dataset source: [Add Kaggle dataset link here]
 
-CNN/ResNet-50 report outputs:
+The project report mentions:
 
-![CNN sample output predictions](docs/screenshots/cnn-report/cnn-sample-output-predictions.png)
+- Dataset source: Kaggle
+- Training images: 999
+- Test images: 999
+- Classes: `fire` and `no_fire`
+- Input image size: 224 x 224
 
-![CNN classification report](docs/screenshots/cnn-report/cnn-classification-report.png)
-
-![CNN fire prediction output](docs/screenshots/cnn-report/cnn-fire-prediction-output.png)
-
-Legacy notebook output:
-
-![Legacy REC curve comparison](docs/screenshots/legacy-notebook/cell-84-output-02-relative-performance-of-random-forest-and-nn-plt.png)
-
-More extracted screenshots are available in `docs/screenshots/`.
-
-## Dataset
-
-The original report describes a Kaggle image dataset with two classes:
-
-- `fire`
-- `no_fire`
-
-All images are resized to `224 x 224` pixels.
-
-Expected local dataset structure:
+Expected dataset structure:
 
 ```text
 data/
@@ -108,57 +97,92 @@ data/
     `-- no_fire/
 ```
 
-The original CNN image dataset itself was not present in the supplied local project folder, so only the expected structure is included. Add the image folders locally before training.
+Class folder names must be exactly `fire` and `no_fire`.
 
-The found archive also included the small CSV dataset for the legacy notebook:
+## Model Architecture
 
-- `data/legacy_forestfires.csv`
+The model is built using:
+
+- ResNet-50 base model
+- ImageNet pretrained weights
+- `include_top=False`
+- Global average pooling
+- Dense layer with ReLU activation
+- Dropout
+- Sigmoid output layer for binary classification
+- Adam optimizer
+- Binary cross-entropy loss
+
+The trained model is not included in this repository. After training, it is saved locally as:
+
+```text
+models/forest_fire_resnet50.keras
+```
+
+## Results
+
+| Metric | Value |
+|---|---:|
+| Test Accuracy | 95.80% |
+| Validation Accuracy | 96.00% |
+| Validation Loss | 0.0458 |
+| Test Loss | 0.1589 |
+
+These results are based on the project report and may vary depending on dataset split, training environment, preprocessing, and random initialization.
 
 ## Setup
 
 ```bash
+git clone https://github.com/krishna-krishna-26/forest-fire-detection-cnn.git
+cd forest-fire-detection-cnn
 pip install -r requirements.txt
 ```
 
-## Train
+## Training
 
 ```bash
-python src/train.py --train-dir data/train --val-dir data/test --epochs 20 --model-out models/forest_fire_resnet50.keras
+python -m src.train --train-dir data/train --val-dir data/test --epochs 20 --model-out models/forest_fire_resnet50.keras
 ```
 
-## Predict
+## Prediction
 
 ```bash
-python src/predict.py --model models/forest_fire_resnet50.keras --image path/to/image.jpg
+python -m src.predict --model models/forest_fire_resnet50.keras --image path/to/image.jpg
 ```
 
-## Methodology
+Expected prediction output:
 
-1. Collect labelled fire and no-fire images.
-2. Resize images to 224 x 224 pixels.
-3. Apply preprocessing and augmentation.
-4. Load ResNet-50 with ImageNet weights.
-5. Replace the final classifier with binary classification layers.
-6. Train using Adam optimizer and binary cross-entropy loss.
-7. Evaluate using accuracy, precision, recall, F1-score, loss, and confusion matrix.
-8. Use the trained model for image prediction or future real-time camera integration.
+```text
+Prediction: Fire
+Fire probability: 0.9321
+```
 
-## Future Scope
+## Screenshots
 
-- Add larger and more diverse datasets.
-- Integrate satellite, drone, or CCTV image feeds.
-- Add weather data such as temperature, humidity, wind, and rainfall.
-- Try EfficientNet, DenseNet, or Vision Transformers.
-- Deploy on edge devices for real-time alerts.
-- Add explainability with Grad-CAM.
+CNN/ResNet-50 report outputs:
 
-## Still To Add
+![CNN sample output predictions](docs/screenshots/cnn-report/cnn-sample-output-predictions.png)
 
-- Original CNN image dataset folders, if available.
-- Original trained model file, for example `.keras` or `.h5`.
-- Executed CNN notebook outputs generated from the actual dataset.
-- A small demo app using Streamlit or Flask for image upload and prediction.
-- A license file, if this project should be reused publicly.
+![CNN classification report](docs/screenshots/cnn-report/cnn-classification-report.png)
+
+![CNN fire prediction output](docs/screenshots/cnn-report/cnn-fire-prediction-output.png)
+
+More screenshots are available in `docs/screenshots/`.
+
+## Project Status
+
+The repository is structured for review by recruiters and interviewers. It includes source code, a CNN notebook, project report, presentation, documentation, and output screenshots.
+
+The original CNN dataset and trained model file are not committed. Add them locally before training or prediction.
+
+## Future Improvements
+
+- Add the official Kaggle dataset link.
+- Add the trained model through GitHub Releases or Git LFS if required.
+- Save executed CNN notebook outputs after running on the real dataset.
+- Add Grad-CAM visual explanations.
+- Compare ResNet-50 with EfficientNet, DenseNet, or Vision Transformers.
+- Improve robustness using larger and more diverse fire/no-fire datasets.
 
 ## Author
 

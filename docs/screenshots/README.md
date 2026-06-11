@@ -18,7 +18,7 @@ The following screenshots were rendered from `reports/forest-fire-detection-usin
 
 The `legacy-notebook/` folder contains all PNG plot outputs extracted from:
 
-- `notebooks/legacy_forest_fire_area_prediction.ipynb`
+- `legacy/notebooks/legacy_forest_fire_area_prediction.ipynb`
 
 These are from the CSV-based burned-area prediction notebook, not the CNN image classifier.
 
