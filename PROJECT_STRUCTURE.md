@@ -9,6 +9,8 @@ Python source code for training and prediction.
 - `config.py`: shared image size, batch size, epoch count, and default model path.
 - `train.py`: ResNet-50 transfer-learning training pipeline.
 - `predict.py`: single-image prediction script.
+- `evaluate.py`: test-set evaluation with classification report and confusion matrix output.
+- `test_cases.py`: report-style robustness checks for fire, no-fire, rotated, blurred, lighting, and outlier images.
 
 ## `notebooks/`
 
@@ -49,7 +51,7 @@ Final project presentation PDF.
 
 ## `docs/`
 
-Project documentation, local file inventory, detailed project notes, and screenshots.
+Project documentation, local file inventory, implementation/testing notes, detailed project notes, and screenshots.
 
 ## `legacy/`
 

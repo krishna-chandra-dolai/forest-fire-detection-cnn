@@ -19,4 +19,8 @@ data/processed/
 models/*.keras
 models/*.h5
 models/*.pkl
+models/*.png
+models/*.txt
+models/class_indices.json
+models/evaluation/
 !models/README.md

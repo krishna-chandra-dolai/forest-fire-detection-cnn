@@ -24,6 +24,8 @@ Forest fires can spread quickly and cause major environmental, economic, and hum
 - Early stopping and best-model checkpointing
 - Confusion matrix generation
 - Single-image prediction script
+- Separate evaluation script for classification report and confusion matrix
+- Report-style test-case script for robustness checks
 - Jupyter Notebook version of the CNN workflow
 - Project report, presentation, and output screenshots included
 
@@ -52,6 +54,7 @@ forest-fire-detection-cnn/
 |   `-- README.md
 |-- docs/
 |   |-- screenshots/
+|   |-- implementation-and-testing.md
 |   |-- project-details.md
 |   `-- local-file-inventory.md
 |-- models/
@@ -65,7 +68,9 @@ forest-fire-detection-cnn/
 |-- src/
 |   |-- __init__.py
 |   |-- config.py
+|   |-- evaluate.py
 |   |-- train.py
+|   |-- test_cases.py
 |   `-- predict.py
 `-- legacy/
     `-- old/unrelated CSV-based project files
@@ -108,10 +113,11 @@ The model is built using:
 - `include_top=False`
 - Global average pooling
 - Dense layer with ReLU activation
-- Dropout
+- Dropout, using the report's `0.6` dropout setting by default
 - Sigmoid output layer for binary classification
-- Adam optimizer
+- Adam optimizer, using the report's `1e-5` fine-tuning learning rate by default
 - Binary cross-entropy loss
+- Fine-tuning of the last 30 ResNet-50 layers by default
 
 The trained model is not included in this repository. After training, it is saved locally as:
 
@@ -144,6 +150,19 @@ pip install -r requirements.txt
 python -m src.train --train-dir data/train --val-dir data/test --epochs 20 --model-out models/forest_fire_resnet50.keras
 ```
 
+## Evaluation
+
+```bash
+python -m src.evaluate --model models/forest_fire_resnet50.keras --test-dir data/test --output-dir models/evaluation
+```
+
+This writes:
+
+```text
+models/evaluation/classification_report.txt
+models/evaluation/confusion_matrix.png
+```
+
 ## Prediction
 
 ```bash
@@ -157,11 +176,21 @@ Prediction: Fire
 Fire probability: 0.9321
 ```
 
+## Report-Style Test Cases
+
+```bash
+python -m src.test_cases --model models/forest_fire_resnet50.keras --fire-image path/to/fire.jpg --no-fire-image path/to/no_fire.jpg --outlier-image path/to/outlier.jpg
+```
+
+This script covers the practical model-load, fire/non-fire prediction, rotation, blur, lighting, and outlier tests described in the project report.
+
 ## Screenshots
 
 CNN/ResNet-50 report outputs:
 
 ![CNN sample output predictions](docs/screenshots/cnn-report/cnn-sample-output-predictions.png)
+
+![CNN confusion matrix and classification report](docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png)
 
 ![CNN classification report](docs/screenshots/cnn-report/cnn-classification-report.png)
 

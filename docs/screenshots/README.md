@@ -9,6 +9,10 @@ The following screenshots were rendered from `reports/forest-fire-detection-usin
 - `cnn-report/cnn-fire-prediction-output.png`
 - `cnn-report/cnn-classification-report.png`
 - `cnn-report/cnn-sample-output-predictions.png`
+- `cnn-report/cnn-confusion-matrix-and-report.png`
+- `cnn-report/cnn-imports-code.png`
+- `cnn-report/cnn-data-augmentation-code.png`
+- `cnn-report/cnn-model-training-code.png`
 - `cnn-report/cnn-results-page-55.png`
 - `cnn-report/cnn-results-page-56.png`
 - `cnn-report/cnn-results-page-57.png`
