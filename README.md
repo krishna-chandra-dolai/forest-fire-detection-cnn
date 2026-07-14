@@ -1,235 +1,151 @@
-# Forest Fire Detection Using CNN
+# Forest Fire Detection Using CNN (ResNet-50 Transfer Learning)
 
-Binary forest fire image classification using a Convolutional Neural Network with ResNet-50 transfer learning.
+> **MCA Final-Semester Project (2024) — Andhra University College of Engineering (A).**
+> Awarded the **O grade (Outstanding, 14 credits)**.
+> Binary fire / no-fire image classification using a Convolutional Neural Network with **ResNet-50** transfer learning (TensorFlow/Keras).
 
-## Project Overview
+---
 
-This project detects whether an input image belongs to one of two classes:
+## Overview
 
-- Fire
-- No Fire
+This project detects whether an input image contains a forest fire, classifying each image into one of two classes:
 
-The model uses ResNet-50 with ImageNet transfer learning, TensorFlow/Keras, and 224 x 224 image input. The goal is to support early fire detection from image data captured by cameras, drones, or monitoring systems.
+- **Fire**
+- **No Fire**
 
-## Problem Statement
+The model uses **ResNet-50** with ImageNet pretrained weights, fine-tuned on a labelled fire / no-fire image dataset at 224 × 224 resolution. The goal is to support early fire detection from images captured by cameras, drones, or monitoring systems, where manual observation is slow and hard to scale.
 
-Forest fires can spread quickly and cause major environmental, economic, and human damage. Manual monitoring is slow and difficult at scale. This project applies deep learning to classify images as fire or no fire, helping support faster detection and response.
-
-## Key Features
-
-- Binary image classification: fire vs no fire
-- ResNet-50 based transfer learning
-- TensorFlow/Keras implementation
-- Image preprocessing and augmentation
-- Early stopping and best-model checkpointing
-- Confusion matrix generation
-- Single-image prediction script
-- Separate evaluation script for classification report and confusion matrix
-- Report-style test-case script for robustness checks
-- Jupyter Notebook version of the CNN workflow
-- Project report, presentation, and output screenshots included
+The repository contains the training, evaluation, prediction, and test-case pipelines, a notebook version of the workflow, and the original project report, presentation, and output screenshots.
 
 ## Tech Stack
 
-- Python
-- TensorFlow/Keras
-- ResNet-50
-- NumPy
-- Pandas
-- scikit-learn
-- Matplotlib
-- Seaborn
-- OpenCV/Pillow
-- Jupyter Notebook
+- **Language:** Python
+- **Deep learning:** TensorFlow / Keras, ResNet-50 (transfer learning)
+- **Data / numerics:** NumPy, Pandas
+- **Metrics & viz:** scikit-learn, Matplotlib, Seaborn
+- **Image processing:** OpenCV, Pillow
+- **Environment:** Jupyter Notebook
+
+## Model Architecture
+
+- ResNet-50 base (`weights="imagenet"`, `include_top=False`), input `224 × 224 × 3`
+- Global Average Pooling
+- Dense layer (1024 units, ReLU)
+- Dropout (default `0.6`)
+- Sigmoid output for binary classification
+- Optimizer: Adam (default fine-tuning learning rate `1e-5`)
+- Loss: binary cross-entropy
+- Last 30 ResNet-50 layers unfrozen for fine-tuning (default)
+- Training augmentation: rotation, width/height shift, shear, zoom, horizontal flip
+- Callbacks: early stopping and best-model checkpointing
 
 ## Project Structure
 
 ```text
 forest-fire-detection-cnn/
-|-- README.md
-|-- requirements.txt
-|-- .gitignore
-|-- LICENSE
-|-- PROJECT_STRUCTURE.md
-|-- data/
-|   `-- README.md
-|-- docs/
-|   |-- screenshots/
-|   |-- implementation-and-testing.md
-|   |-- project-details.md
-|   `-- local-file-inventory.md
-|-- models/
-|   `-- README.md
-|-- notebooks/
-|   `-- forest_fire_detection_cnn_resnet50.ipynb
-|-- presentation/
-|   `-- final-presentation.pdf
-|-- reports/
-|   `-- forest-fire-detection-using-cnn.pdf
-|-- src/
-|   |-- __init__.py
-|   |-- config.py
-|   |-- evaluate.py
-|   |-- train.py
-|   |-- test_cases.py
-|   `-- predict.py
-`-- legacy/
-    `-- old/unrelated CSV-based project files
+├── src/
+│   ├── config.py        # image size, batch size, epochs, default model path
+│   ├── train.py         # ResNet-50 transfer-learning training pipeline
+│   ├── evaluate.py      # test-set evaluation: classification report + confusion matrix
+│   ├── predict.py       # single-image prediction
+│   └── test_cases.py    # report-style robustness checks
+├── notebooks/           # notebook version of the CNN/ResNet-50 workflow
+├── reports/             # project report (PDF)
+├── presentation/        # final presentation (PDF)
+├── docs/                # detailed notes, testing docs, and output screenshots
+├── data/                # dataset instructions (images not committed)
+├── models/              # model output instructions (trained model not committed)
+├── requirements.txt
+├── LICENSE
+└── README.md
 ```
 
-## Dataset Instructions
+## Dataset
 
-The dataset is not included in this repository. Download it manually and place it inside `data/`.
+The image dataset is **not committed** to this repository. As described in the project report:
 
-Dataset source: [Add Kaggle dataset link here]
+- Source: Kaggle (fire / no-fire image dataset)
+- Classes: `fire`, `no_fire`
+- Training images: 999 · Test images: 999
+- Input size: 224 × 224
 
-The project report mentions:
-
-- Dataset source: Kaggle
-- Training images: 999
-- Test images: 999
-- Classes: `fire` and `no_fire`
-- Input image size: 224 x 224
-
-Expected dataset structure:
+Download the dataset and place it in the expected structure before training:
 
 ```text
 data/
-|-- train/
-|   |-- fire/
-|   `-- no_fire/
-`-- test/
-    |-- fire/
-    `-- no_fire/
+├── train/
+│   ├── fire/
+│   └── no_fire/
+└── test/
+    ├── fire/
+    └── no_fire/
 ```
 
-Class folder names must be exactly `fire` and `no_fire`.
+Folder names must be exactly `fire` and `no_fire`.
 
-## Model Architecture
+## How to Run
 
-The model is built using:
+```bash
+# 1. Clone and install dependencies
+git clone https://github.com/krishna-krishna-26/forest-fire-detection-cnn.git
+cd forest-fire-detection-cnn
+pip install -r requirements.txt
 
-- ResNet-50 base model
-- ImageNet pretrained weights
-- `include_top=False`
-- Global average pooling
-- Dense layer with ReLU activation
-- Dropout, using the report's `0.6` dropout setting by default
-- Sigmoid output layer for binary classification
-- Adam optimizer, using the report's `1e-5` fine-tuning learning rate by default
-- Binary cross-entropy loss
-- Fine-tuning of the last 30 ResNet-50 layers by default
+# 2. Train (after placing the dataset under data/)
+python -m src.train --train-dir data/train --val-dir data/test --epochs 20 \
+    --model-out models/forest_fire_resnet50.keras
 
-The trained model is not included in this repository. After training, it is saved locally as:
+# 3. Evaluate on the test set (writes classification report + confusion matrix)
+python -m src.evaluate --model models/forest_fire_resnet50.keras \
+    --test-dir data/test --output-dir models/evaluation
 
-```text
-models/forest_fire_resnet50.keras
+# 4. Predict on a single image
+python -m src.predict --model models/forest_fire_resnet50.keras --image path/to/image.jpg
+
+# 5. Report-style robustness tests (load, fire/no-fire, rotation, blur, lighting, outlier)
+python -m src.test_cases --model models/forest_fire_resnet50.keras \
+    --fire-image path/to/fire.jpg --no-fire-image path/to/no_fire.jpg \
+    --outlier-image path/to/outlier.jpg
 ```
 
 ## Results
 
+The following results are taken from the graded project report. The dataset and trained model are
+not committed, so they are not reproduced by this repository as-is and may vary with dataset split,
+preprocessing, and random initialization.
+
 | Metric | Value |
 |---|---:|
-| Test Accuracy | 95.80% |
-| Validation Accuracy | 96.00% |
-| Validation Loss | 0.0458 |
-| Test Loss | 0.1589 |
+| Test accuracy | 95.80% |
+| Validation accuracy | 96.00% |
+| Validation loss | 0.0458 |
+| Test loss | 0.1589 |
 
-These results are based on the project report and may vary depending on dataset split, training environment, preprocessing, and random initialization.
+**Classification report (from the report):**
 
-## Setup
+| Class | Precision | Recall | F1-score |
+|---|---:|---:|---:|
+| Fire | 0.99 | 0.95 | 0.97 |
+| No Fire | 0.87 | 0.97 | 0.92 |
+| Weighted avg | 0.96 | 0.96 | 0.96 |
 
-```bash
-git clone https://github.com/krishna-krishna-26/forest-fire-detection-cnn.git
-cd forest-fire-detection-cnn
-pip install -r requirements.txt
-```
+The model favours high fire precision (few false fire alarms) while keeping strong recall — in a
+fire-detection setting, missing a real fire is more costly than an occasional false alarm.
 
-## Training
-
-```bash
-python -m src.train --train-dir data/train --val-dir data/test --epochs 20 --model-out models/forest_fire_resnet50.keras
-```
-
-## Evaluation
-
-```bash
-python -m src.evaluate --model models/forest_fire_resnet50.keras --test-dir data/test --output-dir models/evaluation
-```
-
-This writes:
-
-```text
-models/evaluation/classification_report.txt
-models/evaluation/confusion_matrix.png
-```
-
-## Prediction
-
-```bash
-python -m src.predict --model models/forest_fire_resnet50.keras --image path/to/image.jpg
-```
-
-Expected prediction output:
-
-```text
-Prediction: Fire
-Fire probability: 0.9321
-```
-
-## Report-Style Test Cases
-
-```bash
-python -m src.test_cases --model models/forest_fire_resnet50.keras --fire-image path/to/fire.jpg --no-fire-image path/to/no_fire.jpg --outlier-image path/to/outlier.jpg
-```
-
-This script covers the practical model-load, fire/non-fire prediction, rotation, blur, lighting, and outlier tests described in the project report.
-
-## Screenshots
-
-CNN/ResNet-50 report outputs:
-
-Report code screenshots from pages 35-37:
-
-![Report page 35 imports code](docs/screenshots/cnn-report/cnn-imports-code.png)
-
-![Report pages 35-36 data preprocessing and augmentation code](docs/screenshots/cnn-report/cnn-data-augmentation-code.png)
-
-![Report page 37 model training code](docs/screenshots/cnn-report/cnn-model-training-code.png)
-
-Report output screenshots:
-
-![CNN sample output predictions](docs/screenshots/cnn-report/cnn-sample-output-predictions.png)
-
-![CNN non-fire sample images](docs/screenshots/cnn-report/cnn-non-fire-sample-images.png)
-
-![CNN confusion matrix and classification report](docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png)
-
-![CNN epoch-wise performance overview](docs/screenshots/cnn-report/cnn-epoch-performance-overview.png)
-
-![CNN classification report](docs/screenshots/cnn-report/cnn-classification-report.png)
-
-![CNN fire prediction output](docs/screenshots/cnn-report/cnn-fire-prediction-output.png)
-
-More screenshots are available in `docs/screenshots/`.
-
-## Project Status
-
-The repository is structured for review by recruiters and interviewers. It includes source code, a CNN notebook, project report, presentation, documentation, and output screenshots.
-
-The original CNN dataset and trained model file are not committed. Add them locally before training or prediction.
+Report code and output screenshots are available under `docs/screenshots/`.
 
 ## Future Improvements
 
-- Add the official Kaggle dataset link.
-- Add the trained model through GitHub Releases or Git LFS if required.
-- Save executed CNN notebook outputs after running on the real dataset.
-- Add Grad-CAM visual explanations.
-- Compare ResNet-50 with EfficientNet, DenseNet, or Vision Transformers.
-- Improve robustness using larger and more diverse fire/no-fire datasets.
+- Publish the trained model via GitHub Releases or Git LFS.
+- Save executed notebook outputs on the real dataset.
+- Add Grad-CAM explanations for model interpretability.
+- Compare ResNet-50 against EfficientNet, DenseNet, or Vision Transformers.
+- Train on larger and more diverse fire / no-fire datasets.
+
+## License
+
+Released under the [MIT License](LICENSE).
 
 ## Author
 
-Krishna Chandra Dolai
-
-Master of Computer Applications, Andhra University College of Engineering (A), Andhra University.
+**Krishna Chandra Dolai** — Master of Computer Applications, Andhra University College of Engineering (A).
