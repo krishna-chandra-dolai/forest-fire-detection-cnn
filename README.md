@@ -87,7 +87,7 @@ Folder names must be exactly `fire` and `no_fire`.
 
 ```bash
 # 1. Clone and install dependencies
-git clone https://github.com/krishna-krishna-26/forest-fire-detection-cnn.git
+git clone https://github.com/krishna-chandra-dolai/forest-fire-detection-cnn.git
 cd forest-fire-detection-cnn
 pip install -r requirements.txt
 
