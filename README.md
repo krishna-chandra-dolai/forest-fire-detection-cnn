@@ -108,6 +108,10 @@ python -m src.test_cases --model models/forest_fire_resnet50.keras \
     --outlier-image path/to/outlier.jpg
 ```
 
+## Verification scope
+
+The graded report records 12 passed test cases. The current `src/test_cases.py` script automates the model-load and image-level fire/no-fire, rotation, blur, lighting, and outlier checks. Full-dataset generalization, adversarial, large-batch, scalability, and post-deployment cases still require the appropriate model, dataset, or live stream; the script reports that limitation instead of fabricating an automated pass.
+
 ## Results
 
 The following results are taken from the graded project report. The dataset and trained model are
