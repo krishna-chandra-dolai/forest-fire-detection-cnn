@@ -8,6 +8,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from src.config import BATCH_SIZE, DEFAULT_MODEL_PATH, IMAGE_SIZE
+from src.labeling import labels_from_class_indices
 
 
 def validate_test_dataset(test_dir: str) -> None:
@@ -24,10 +25,6 @@ def validate_test_dataset(test_dir: str) -> None:
             "data/test/no_fire\n\n"
             "Download the dataset and place it in the expected folders before evaluation."
         )
-
-
-def labels_from_class_indices(class_indices: dict[str, int]) -> list[str]:
-    return [label for label, _ in sorted(class_indices.items(), key=lambda item: item[1])]
 
 
 def build_test_generator(test_dir: str, batch_size: int):
