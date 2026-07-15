@@ -140,9 +140,11 @@ Report code and output screenshots are available under `docs/screenshots/`.
 
 ### Visual evidence
 
-![Report confusion matrix and classification report](docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png)
+![Five Non-Fire and five Fire output predictions](docs/results/report-derived/fire-and-non-fire-predictions-sharp.jpg)
 
-See the curated [results gallery](docs/results-gallery.md) for training and prediction screenshots. These are report-derived artifacts; the repository does not claim that they were freshly reproduced without the original dataset and model checkpoint.
+<img src="docs/results/report-derived/confusion-matrix-and-report-sharp.png" alt="Report confusion matrix and classification report" width="760">
+
+See the curated [results gallery](docs/results-gallery.md) for the sharp Fire/Non-Fire prediction examples, training log, classification report, and image provenance. These are report-derived artifacts; the repository does not claim that they were freshly reproduced without the original dataset and model checkpoint.
 
 ## Future Improvements
 
