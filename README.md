@@ -138,6 +138,12 @@ fire-detection setting, missing a real fire is more costly than an occasional fa
 
 Report code and output screenshots are available under `docs/screenshots/`.
 
+### Visual evidence
+
+![Report confusion matrix and classification report](docs/screenshots/cnn-report/cnn-confusion-matrix-and-report.png)
+
+See the curated [results gallery](docs/results-gallery.md) for training and prediction screenshots. These are report-derived artifacts; the repository does not claim that they were freshly reproduced without the original dataset and model checkpoint.
+
 ## Future Improvements
 
 - Publish the trained model via GitHub Releases or Git LFS.
