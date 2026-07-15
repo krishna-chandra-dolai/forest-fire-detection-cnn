@@ -13,6 +13,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from src.config import BATCH_SIZE, DEFAULT_MODEL_PATH, EPOCHS, IMAGE_SIZE
+from src.labeling import labels_from_class_indices
 
 
 def validate_dataset_structure(train_dir: str, val_dir: str) -> None:
@@ -95,10 +96,6 @@ def build_model(learning_rate: float, dropout_rate: float, fine_tune_layers: int
         metrics=["accuracy"],
     )
     return model
-
-
-def labels_from_class_indices(class_indices: dict[str, int]) -> list[str]:
-    return [label for label, _ in sorted(class_indices.items(), key=lambda item: item[1])]
 
 
 def save_class_indices(class_indices: dict[str, int], model_path: Path) -> None:

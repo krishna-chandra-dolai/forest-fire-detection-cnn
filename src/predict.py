@@ -1,5 +1,4 @@
 import argparse
-import json
 from pathlib import Path
 
 import numpy as np
@@ -7,16 +6,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
 from src.config import DEFAULT_MODEL_PATH, IMAGE_SIZE
-
-
-DEFAULT_CLASS_INDICES = {"fire": 0, "no_fire": 1}
-
-
-def load_class_indices(model_path: str | Path) -> dict[str, int]:
-    class_indices_path = Path(model_path).parent / "class_indices.json"
-    if class_indices_path.exists():
-        return json.loads(class_indices_path.read_text(encoding="utf-8"))
-    return DEFAULT_CLASS_INDICES
+from src.labeling import fire_probability_from_binary_output, load_class_indices
 
 
 def load_image(image_path: str):
@@ -24,15 +14,6 @@ def load_image(image_path: str):
     array = image.img_to_array(img)
     array = np.expand_dims(array, axis=0)
     return array / 255.0
-
-
-def fire_probability_from_binary_output(raw_probability: float, class_indices: dict[str, int]) -> float:
-    fire_index = class_indices.get("fire")
-    if fire_index == 0:
-        return 1.0 - raw_probability
-    if fire_index == 1:
-        return raw_probability
-    return raw_probability
 
 
 def predict_image(model, image_path: str, class_indices: dict[str, int], threshold: float):
